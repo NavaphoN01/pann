@@ -5,7 +5,8 @@ let appConfig = {
     isProd,
     isDev: !isProd,
     ClearDataBeforeLoad: isProd ? false:true,
-    dbconnectinfo
+    dbconnectinfo,
+    ssoIssuer: 'http://localhost:8888/realms/master'
 }
 
 export default appConfig
