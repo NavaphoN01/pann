@@ -1,12 +1,16 @@
 import Router from "koa-router";
+import db from '../db'
 
 const router = new Router()
 
 router
-    .get('/', (ctx,next) => {
-        ctx.body = [
-            { id: 1, topic: '240-124 Midterm 1/2566', description: 'คะแนน Assignment ชิ้นที่ 1', pubDateTime: '2022-12-21 10:30:00', userCode: 'suthon.s'},
-            { id: 2, topic: 'ทุนเรียนดีประจำปี 2567', description: 'test 123', remarkIfPositive: 'Congrat for everyone', pubDateTime: '2022-12-10 15:40:00', userCode: 'suthon.s'}
-        ]
+.get('/', async (ctx,next) => {
+    let query = db('announcement').select('*')
+    if (ctx.request.query['keyword']) {
+        const keyword = String(ctx.request.query['keyword'])
+        query = query.where((it) => {it.where('topic','like', `%${keyword}`).orWhere('description','like',`%${keyword}`)})
+    }
+    ctx.body = await query.orderBy('id','desc')
+
     })
 export default router
