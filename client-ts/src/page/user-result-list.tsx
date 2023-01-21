@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import UserResultCard from '../component/user-result-card';
 import UserResult from '../model/UserResult';
 import Repo from '../repositories'
+import PannAppbar from '../component/pann-app-bar';
 
 function UserResultList() {
     const [userResultList, setUserResultList] = useState<UserResult[]>([])
@@ -41,6 +42,7 @@ function UserResultList() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
+            <PannAppbar></PannAppbar>
             <Select
             sx={{ m: 2, minWidth: 120 }}
             value={selectFilter}
