@@ -14,6 +14,8 @@ const makeQuery = () => db('userResult').select(
     'announcement.pubDateTime as announcementPubDateTime'
 ).leftJoin('announcement', 'userResult.announcementId', 'announcement.id')
 
+const findById = (id: number) => makeQuery().where({'userResult.id':id})
+
 const updateUserResult = (id:number, userCode:string, data:any) => {
     return db('userResult').where({id,userCode}).update(data)
 }
@@ -38,7 +40,7 @@ router
     ctx.body = userResult.map(it => nestObject(it, 'announcement'))
 
     })
-    .get('/:id/markAsViewd', async (ctx,next) => {
+    .get('/:id/markAsViewed', async (ctx,next) => {
         const id = parseInt(ctx.params.id)
         const authData = ctx.state.authData as AuthData
         const viewDateTime = new Date()
@@ -47,7 +49,10 @@ router
             ctx.response.status = 404
             return
         }
-        ctx.body = {statusCode: 1 , viewDateTime}
+        const userResults = await findById(id)
+        const result = userResults.map(it => nestObject(it,'announcement'))
+        ctx.body = result[0]
+
     })
     .get('/:id/acknowledge', async (ctx, next) => {
         const id = parseInt(ctx.params.id)
@@ -58,7 +63,10 @@ router
             ctx.response.status = 404
             return
         }
-        ctx.body = {statusCode: 1, ackDateTime}
+        const userResults = await findById(id)
+        const result = userResults.map(it => nestObject(it,'announcement'))
+        ctx.body = result[0]
+
     })
     .get('/:id/pin/:value', async (ctx, next) => {
         const id = parseInt(ctx.params.id)
@@ -69,7 +77,10 @@ router
             ctx.response.status = 404
             return
         }
-        ctx.body = {statusCode: 1, isPinned}
+        const userResults = await findById(id)
+        const result = userResults.map(it => nestObject(it,'announcement'))
+        ctx.body = result[0]
+
     })
 
 export default router
