@@ -30,13 +30,13 @@ function AnnouncementForm(props: Prop) {
                 <TextField fullWidth sx={{ minWidth: 120 }} label='Topic' variant='outlined' defaultValue={props.announcement.topic} inputRef={topicRef} />
             </div>
             <div style={{ margin: 20 }}>
-                <TextField fullWidth sx={{ minWidth: 120 }} label='Description' variant='outlined' defaultValue={props.announcement.description} inputRef={descriptionRef} />
+            <TextField fullWidth multiline sx={{ minWidth: 120 }} rows={4} label='Description' variant='outlined' defaultValue={props.announcement.description} inputRef={descriptionRef} />
             </div>
             <div style={{ margin: 20 }}>
-                <TextField fullWidth sx={{ minWidth: 120 }} label='Remark (Positive)' variant='outlined' defaultValue={props.announcement.remarkIfPositive} inputRef={remarkIfPositive} />
+            <TextField fullWidth multiline sx={{ minWidth: 120 }} rows={4} label='Remark (Positive)' variant='outlined' defaultValue={props.announcement.remarkIfPositive} inputRef={remarkIfPositive} />
             </div>
             <div style={{ margin: 20 }}>
-                <TextField fullWidth sx={{ minWidth: 120 }} label='Remark (Negative)' variant='outlined' defaultValue={props.announcement.remarkIfNegative} inputRef={remarkIfNegative} />
+            <TextField fullWidth multiline sx={{ minWidth: 120 }} rows={4} label='Remark (Negative)' variant='outlined' defaultValue={props.announcement.remarkIfNegative} inputRef={remarkIfNegative} />
             </div>
             <div style={{ margin: 20 }}>
                 <Button variant="contained" sx={{ mb: 1, float: 'right', vertifcaflAlign: 'bottom' }} onClick={onSubmit}>{props.announcement.id ? 'Update' : 'Create'}</Button>
