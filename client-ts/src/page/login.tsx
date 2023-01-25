@@ -1,4 +1,4 @@
-import { BottomNavigation, Button, Paper } from '@mui/material'
+import { Button, Paper } from '@mui/material'
 import { Box } from '@mui/system'
 import { Login as LoginIcon } from '@mui/icons-material'
 import { useAuth } from "react-oidc-context";
@@ -61,6 +61,7 @@ function Login() {
                     Log in
                 </Button>       
             </Box>
+            <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 100}}></Box>
         </Paper>  
     )
 }

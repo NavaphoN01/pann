@@ -11,11 +11,13 @@ export interface AuthData {
 }
 
 export async function initSsoCert() {
+     
     const result = await axios.get(appConfig.ssoIssuer)
     public_key = `-----BEGIN PUBLIC KEY-----\n${result.data.public_key}\n-----END PUBLIC KEY-----\n`
 }
 
 export async function verifyJwt(token: string){
+    
     return new Promise<any>((resolve, reject) => {
         jwt.verify(token, public_key as jwt.Secret, { issuer: appConfig.ssoIssuer, algorithms: ['RS256'] },(err,decoded) => {
             if(err){

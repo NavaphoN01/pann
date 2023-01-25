@@ -47,13 +47,13 @@ function AppProvider({children}: AppProviderProps){
     const json = sessionStorage.getItem('userInfo') as string
     const data = JSON.parse(json)
     if(data){
-      _setUserInfo({
-        ready: data.ready,
-        username: data.username,
-        displayName: data.displayName,
-        staff: data.staff
-      })}
-  },[])
+        _setUserInfo({
+            ready: data.ready,
+            username: data.username,
+            displayName: data.displayName,
+            staff: data.staff
+    })}
+},[])
 
   function setUserInfo(userInfo: UserInfo){
       _setUserInfo({...userInfo, ready: true,staff:isStaff()})
@@ -86,4 +86,4 @@ function AppProvider({children}: AppProviderProps){
   )
 }
 
-export default AppProvider
+export default AppProvider 
